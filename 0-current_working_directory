@@ -1,2 +1,2 @@
-#!/bin/bash
-echo "Script printed"
+^#!/bin/bash
+echo "Script printed again"
