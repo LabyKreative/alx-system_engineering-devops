@@ -9,3 +9,4 @@ Move the file.
 Delete the file betty.
 Delete the directory my_first_directory.
 Script that changes the working directory to the previous one.
+Write a script that lists all files (even ones with names beginning with a period character.
