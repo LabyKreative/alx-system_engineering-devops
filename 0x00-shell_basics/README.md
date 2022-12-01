@@ -13,4 +13,5 @@ Write a script that lists all files (even ones with names beginning with a perio
 Script that prints the type of the file named iamafile.
 Create a symbolic link to.
 Script that moves all files beginning wiht an uppercase letter tot he directory.
-script that deletes all files in the current working directory that end with the character ~.
+Script that deletes all files in the current working directory that end with the character ~.
+Create a script that creates the directories welcome/, welcome/to/ and welcome/to/school in the current directory.
