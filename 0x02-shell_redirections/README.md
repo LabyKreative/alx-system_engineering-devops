@@ -9,4 +9,5 @@ A shell script that creates a funny file name specified.
 A script that writes into the file ls_cwd_content the result of ls -la.
 A script that duplicates the last line of the file iacta.
 A script that deletes all the regular files but not directories with a .js.
-A script that counts the number of directories and sub-directories in vurrent working directories..
+A script that counts the number of directories and sub-directories in vurrent working directories.
+A script that displays the 10 newest files in the current directory.
