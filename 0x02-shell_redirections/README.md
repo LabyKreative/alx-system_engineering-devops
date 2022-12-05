@@ -23,3 +23,4 @@ A script that reverse its input.
 A script that displays all users and their home directories in sorted orders.
 A command that finds all empty files and directories in the current directory and all sub directories.
 A script that lists all the files with a .gif.
+A script that decodes acrostics that use the first letter of each line.
