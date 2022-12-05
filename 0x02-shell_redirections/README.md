@@ -5,4 +5,4 @@ Dipsplay the content of /etc/passwd and /etc/hosts.
 Display the last 10 lines of /etc/passwd.
 Display the first 10 lines of /etc/passwd.
 A script that displays the third line of the file iacta.
-A shell script that creates a file name specified.
+A shell script that creates a funny file name specified.
