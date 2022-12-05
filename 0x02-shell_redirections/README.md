@@ -13,3 +13,4 @@ A script that counts the number of directories and sub-directories in vurrent wo
 A script that displays the 10 newest files in the current directory.
 A script that takes a list of words as input and prints only words that appear exactly once.
 Diplay lines containing the pattern "root" from the file.
+Display the number of lines that contain the pattern "bin" in the file /etc/passwd.
