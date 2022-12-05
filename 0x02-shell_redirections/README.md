@@ -17,3 +17,4 @@ Display the number of lines that contain the pattern "bin" in the file /etc/pass
 Display lines containing the pattern "root" and 3 lines after them in the file.
 Displays all the lines in the file /etc/passwd that do not contain the pattern "bin".
 Display all lines of the file specified.
+Replace all characters A and C from input to Z and e respectively.
