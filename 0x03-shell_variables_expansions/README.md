@@ -6,3 +6,4 @@ A script that lists environment variables.
 A script that lists all local variables and environment variables, and functions.
 A script that creates a new local variable.
 A script that creates a new global variable.
+A script that prints result of the addtion of 128 with value stored.
