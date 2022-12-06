@@ -12,3 +12,4 @@ A script that displays the result of BREATH to the power LOVE.
 A script that converts a nuber from base 2 to base 10.
 A script that prints all possible combinationsof two letters, except oo.
 A script that prints a number with two decimal places, followed by a new line.
+A script that converts a number from base 10 to base 16.
