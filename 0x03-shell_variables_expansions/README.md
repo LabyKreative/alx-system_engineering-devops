@@ -13,4 +13,5 @@ A script that converts a nuber from base 2 to base 10.
 A script that prints all possible combinationsof two letters, except oo.
 A script that prints a number with two decimal places, followed by a new line.
 A script that converts a number from base 10 to base 16.
-A script that encodes and decodes text using the rot13 encryption wonder. 
+A script that encodes and decodes text using the rot13 encryption wonder.
+A script that prints every other line from the input, starting with the first line.
