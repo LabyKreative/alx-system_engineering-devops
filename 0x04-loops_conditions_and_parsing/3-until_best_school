@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Script that displays Best School 10 times.
+
+my_string="Best School"
+count=0
+until [ $count -eq 10 ]; do echo "$my_string"; count=$((count+1)); done
