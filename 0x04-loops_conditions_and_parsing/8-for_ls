@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Write a Bash script that displays:
+# The content of the current directory in a list format
+
+for file in *; do
+    if [[ ! "$file" =~ ^\..* ]] && [[ -f "$file" ]]; then
+        name=$(echo "$file" | cut -d'-' -f2-)
+        echo "$name"
+    fi
+done
