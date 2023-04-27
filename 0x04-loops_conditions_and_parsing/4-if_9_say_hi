@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Script that displays Best School 10 times, and Hi in a new line.
+
+my_string="Best School"
+count=1
+
+while [ $count -le 10 ]
+do
+    if [ $count -eq 9 ]
+    then
+        echo "$my_string"
+        echo 'Hi'
+    else
+        echo "$my_string"
+    fi
+    count=$((count+1))
+done
