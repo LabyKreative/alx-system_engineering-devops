@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Script that displays the content o the file /etc/passwd
+
+while IFS=":" read -r
