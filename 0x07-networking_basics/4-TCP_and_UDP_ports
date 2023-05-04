@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # a script that displays listening ports: that only shows listening sockets
-# and that shows the PID and name of the program to which each socket belongs
+# and the PID and name of the program to which each socket belongs.
 
-echo "Listening ports:"
-netstat -tlnp | grep "LISTEN" | awk '{print $7 " " $NF}'
+netstat -l --program
