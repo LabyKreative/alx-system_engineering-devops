@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 regex = /hbt{2,5}n/
-puts ARGV[0].scan(regex).join
+input = ARGV[0]
+matches = input.scan(regex)
+puts matches.join
