@@ -53,5 +53,3 @@ Host *
     GSSAPIDelegateCredentials no
     IdentityFile ~/.ssh/school
     PasswordAuthentication no
-    config.ssh.forward_x11 = true
-    config.ssh.forward_agent = true
