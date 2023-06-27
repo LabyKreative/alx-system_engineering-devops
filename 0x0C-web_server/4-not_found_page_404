@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# a script that installs Nginx server, redirects /redirect_me, and customizes 404 not found
+
+# Updates the package lists for upgrades and installs Nginx web server
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+# Opens the HTTP port 80 in the UFW firewall to allow Nginx traffic
+sudo ufw allow 'Nginx HTTP'
+
+# Writes the string "Ceci n'est pas une page" to the /usr/share/nginx/html/404.html file
+# using sudo privileges. This customizes the content of the 404 Not Found error page.
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
+
+# Defines a variable `newlines` containing multiple lines of configuration code that will be added to the Nginx configuration file.
+newlines="\\\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}"
+
+# Inserts the contents of the `newlines` variable at line 27 of the Nginx configuration file (/etc/nginx/sites-available/default).
+# This configuration code sets up the error_page and location directives to handle the 404 error.
+sudo sed -i "27i $newlines" /etc/nginx/sites-available/default
+
+# Restarts the Nginx service to apply the changes made to the configuration
+sudo service nginx restart
