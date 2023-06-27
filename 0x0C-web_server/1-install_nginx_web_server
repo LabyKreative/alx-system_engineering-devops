@@ -3,11 +3,9 @@
 # (this script will be run on the server itself)
 # Installs nginx and configures it on a remote server
 
-set -e  # Exit immediately if any command fails
-
 # Update package lists and install nginx
-apt-get update
-apt-get install -y nginx
+apt-get -y update
+apt-get -y install nginx
 
 # Configure firewall to allow Nginx HTTP traffic
 ufw allow 'Nginx HTTP'
@@ -17,6 +15,3 @@ echo 'Hello World!' > /var/www/html/index.nginx-debian.html
 
 # Start nginx service
 service nginx start
-
-# Display a message indicating successful installation
-echo "Nginx has been successfully installed and configured."
