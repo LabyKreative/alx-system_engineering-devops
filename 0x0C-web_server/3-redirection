@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# a script that installs Nginx server and /redirect_me
+# to another page. With "301 Move Permanently" using
+# the "1-install_nginx_web_server" script. 
+
+# Update the package lists for upgrades and installs the Nginx server
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+# Opens the HTTP (port 80) in the UFW firewall to allow Nginx traffic
+sudo ufw allow 'Nginx HTTP'
+
+# Writes the string to the /var/www/html/index file using sudo privileges
+echo "Welcome to IT World!" | sudo tee /var/www/html/index
+
+# Modifies the Nginx default server configuration file to add a rewrite rule that redirects
+# requests for /redirect_me to https://www.youtube.com/watch?v=QH2-TGUlwu4/ permanently
+sudo sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4/ permanent;' /etc/nginx/sites-available/default
+
+# Restarts the Nginx service to apply the changes made to the configuration
+sudo service nginx restart
