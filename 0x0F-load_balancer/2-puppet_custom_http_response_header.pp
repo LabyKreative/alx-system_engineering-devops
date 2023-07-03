@@ -1,45 +1,25 @@
 # a Puppet script that it configures a brand new Ubuntu machine to the requirements asked in this task
 
-$nginx_package = 'nginx'
-
-exec { 'update_package_lists':
-  command => 'apt-get update',
-  path    => '/usr/bin',
-  refreshonly => true,
+exec {'update_package_list':
+  provider => shell,
+  command  => 'sudo apt-get -y update',
+  before   => Exec['install Nginx'],
 }
 
-package { $nginx_package:
-  ensure => installed,
-  require => Exec['update_package_lists'],
+exec {'install Nginx':
+  provider => shell,
+  command  => 'sudo apt-get -y install nginx',
+  before   => Exec['add_header'],
 }
 
-file { '/etc/nginx/sites-available/default':
-  ensure  => file,
-  content => "
-    server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-        add_header X-Served-By \"$hostname\";
-        root   /var/www/html;
-        index  index.html index.htm;
-    
-        location /redirect_me {
-            return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4/;
-        }
-    
-        error_page 404 /404.html;
-        location /404 {
-            root /var/www/html;
-            internal;
-        }
-    }
-  ",
-  require => Package[$nginx_package],
-  notify  => Service['nginx'],
+exec { 'header_display':
+  provider    => shell,
+  environment => ["HOST=${hostname}"],
+  command     => 'sudo sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOST\";/" /etc/nginx/nginx.conf',
+  before      => Exec['restart Nginx'],
 }
 
-service { 'nginx':
-  ensure  => running,
-  enable  => true,
-  require => Package[$nginx_package],
+exec { 'restart Nginx service':
+  provider => shell,
+  command  => 'sudo service nginx restart',
 }
