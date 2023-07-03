@@ -1,6 +1,6 @@
 # a Puppet script that it configures a brand new Ubuntu machine to the requirements asked in this task
 
-nx_package = 'nginx'
+$nginx_package = 'nginx'
 
 exec { 'update_package_lists':
   command => 'apt-get update',
