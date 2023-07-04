@@ -9,13 +9,13 @@ exec {'update_package_list':
 exec {'install Nginx':
   provider => shell,
   command  => 'sudo apt-get -y install nginx',
-  before   => Exec['add_header'],
+  before   => Exec['header_display'],
 }
 
 exec { 'header_display':
   provider    => shell,
   environment => ["HOST=${hostname}"],
-  command     => 'sudo sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOST\";/" /etc/nginx/nginx.conf',
+  command     => 'sudo sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\theader_display X-Served-By \"$HOST\";/" /etc/nginx/nginx.conf',
   before      => Exec['restart Nginx'],
 }
 
