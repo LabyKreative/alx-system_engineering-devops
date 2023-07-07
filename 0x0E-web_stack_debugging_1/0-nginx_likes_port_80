@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# a script that re-confugures a server to listen on port 80 of all the server's active IPv4 IPs
+
+rm /etc/nginx/sites-enabled/default
+# This line removes the default configuration file located in /etc/nginx/sites-enabled/default.
+# By removing this file, we can replace it with a custom configuration.
+
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+# This line creates a symbolic link from /etc/nginx/sites-available/default
+# to /etc/nginx/sites-enabled/default.
+# By doing this, we enable the default configuration for Nginx.
+
+service nginx restart
+# This line restarts the Nginx service, applying the changes made to the configuration files.
+# This ensures that the Nginx server is now listening on port 80 with the updated configuration.
