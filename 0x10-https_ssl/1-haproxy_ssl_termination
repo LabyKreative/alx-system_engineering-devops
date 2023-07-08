@@ -32,17 +32,11 @@ defaults
         errorfile 502 /etc/haproxy/errors/502.http
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
-        option  forwardfor
-        option  http-server-close
-
-frontend www-http
-        bind   0.0.0.0:80
-        reqadd X-Forwarded-Proto:\ http
-        default_backend www-backend
 
 frontend www-https
-        bind *:443 ssl crt /etc/ssl/certs/www.holberton.online
-        reqadd X-Forwarded-Proto:\ https
+        bind *:80
+        bind *:443 ssl crt /etc/haproxy/certs/www.labykreative.tech.pem
+        redirect scheme https if !{ ssl_fc }
         acl    letsencrypt-acl path_beg /.well-known/acme-challenge/
         use_backend letsencrypt-backend if letsencrypt-acl
         mode http
