@@ -1,17 +1,10 @@
 #!/usr/bin/env bash
-# a script that generates a MySQL dump and creates a compressed archive of it
-
-# Check if the password argument is provided
-if [ $# -ne 1 ]; then
-  echo "Usage: $0 <mysql_password>"
-  exit 1
-fi
-
+# a script that generates a MySQL dump and creates a compressed archive of it.
 # Set the password for the MySQL root user
-MYSQL_PASSWORD=$1
+MYSQL_PASSWORD="$1"
 
 # Get the current date
-CURRENT_DATE=$(date +"%d-%m-%Y")
+CURRENT_DATE="$(date +"%d-%m-%Y")"
 
 # Define the backup file and archive names
 DUMP_FILE="backup.sql"
