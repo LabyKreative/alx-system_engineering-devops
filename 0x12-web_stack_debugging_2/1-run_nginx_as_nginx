@@ -1,0 +1,20 @@
+#!/usr/bnm/env bash
+# a script that configures the container to make Nginx run as Nginx, and listening port on 8080
+
+# Nginx is stopped if currently running
+sudo service nginx stop
+
+# Nginx user is changed in nginx.conf
+sed -i 's/user www-data/user nginx/' /etc/nginx/nginx.conf
+
+# Nginx directories ownership is changed to nginx user
+chmod 644 /etc/nginx/nginx.conf
+
+# Nginx is configured to listen on all active IPs on port 8080
+sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+
+# Kill apache ps so as no to interfere with nginx to run
+pkill apache2
+
+# Start nginx ervice
+sudo -u nginx service nginx start
