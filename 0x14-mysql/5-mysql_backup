@@ -4,17 +4,10 @@
 MYSQL_PASSWORD="$1"
 
 # Get the current date
-CURRENT_DATE="$(date +"%d-%m-%Y")"
-
-# Define the backup file and archive names
-DUMP_FILE="backup.sql"
-ARCHIVE_NAME="${CURRENT_DATE}.tar.gz"
+CREATED_FILE="$(date +"%d-%m-%Y").tar.gz"
 
 # Dump the MySQL databases
-mysqldump --user=root --password="${MYSQL_PASSWORD}" --all-databases > $DUMP_FILE
+mysqldump --user=root --password="${MYSQL_PASSWORD}" --all-databases > backup.sql
 
 # Compress the dump file to a tar.gz archive
-tar -czvf $ARCHIVE_NAME $DUMP_FILE
-
-# Remove the dump file
-rm $DUMP_FILE
+tar -czvf "$CREATED_FILE" "backup.sql"
