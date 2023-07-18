@@ -11,12 +11,10 @@ DUMP_FILE="backup.sql"
 ARCHIVE_NAME="${CURRENT_DATE}.tar.gz"
 
 # Dump the MySQL databases
-mysqldump -u root -p${MYSQL_PASSWORD} --all-databases > $DUMP_FILE
+mysqldump --user=root --password="${MYSQL_PASSWORD}" --all-databases > $DUMP_FILE
 
 # Compress the dump file to a tar.gz archive
 tar -czvf $ARCHIVE_NAME $DUMP_FILE
 
 # Remove the dump file
 rm $DUMP_FILE
-
-echo "MySQL backup created: $ARCHIVE_NAME"
