@@ -1,4 +1,4 @@
-#!/usr/bnm/env bash
+#!/usr/bin/env bash
 # a script that configures the container to make Nginx run as Nginx, and listening port on 8080
 
 # Nginx is stopped if currently running
