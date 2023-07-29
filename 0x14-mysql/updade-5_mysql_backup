@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# A script that generates a MySQL dump for the "tyrell_corp" database and creates a compressed archive of it.
+
+# Set the password for the MySQL root user
+MYSQL_PASSWORD="$1"
+
+# Get the current date
+CREATED_FILE="$(date +"%d-%m-%Y").tar.gz"
+
+# Dump the "tyrell_corp" database specifically
+mysqldump --user=root --password="${MYSQL_PASSWORD}" tyrell_corp > tyrell_corp_backup.sql
+
+# Compress the dump file to a tar.gz archive
+tar -czvf "$CREATED_FILE" "tyrell_corp_backup.sql"
+
