@@ -3,10 +3,11 @@
 hot articles, and prints a sorted count of given keywords (case-insensitive,
 delimited by spaces. JS should count as javascript, but java should not).
 """
+import json
 import requests
 
 
-def count_words(subreddit, word_list, instances={}, after="", count=0):
+def count_words(subreddit, word_list, after="", count=[]):
     """Prints count of given arguments found in hot posts of a given subreddit.
     Args:
         subreddit (str): The subreddit to search.
@@ -15,30 +16,47 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
         after (str): The parameter for the next page of the API results.
         count (int): The parameter of results matched thus far.
     """
-    if found_dict is None:
-        found_dict = {}
-    user_agent = {'User-agent': 'test45'}
-    posts = requests.get('http://www.reddit.com/r/{}/hot.json?after={}'
-                         .format(subreddit, after), headers=user_agent)
-    if after is None:
-        word_list = [word.lower() for word in word_list]
+    if after == "":
+        count = [0] * len(word_list)
 
-    if posts.status_code == 200:
-        posts = posts.json()['data']
-        aft = posts['after']
-        posts = posts['children']
-        for post in posts:
-            title = post['data']['title'].lower()
-            for word in title.split(' '):
-                if word in word_list:
-                    if word.lower() in found_dict.keys():
-                        found_dict[word.lower()] += 1
-                    else:
-                        found_dict[word.lower()] = 1
-        if aft is not None:
-            count_words(subreddit, word_list, found_dict, aft)
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    request = requests.get(url,
+                           params={'after': after},
+                           allow_redirects=False,
+                           headers={'user-agent': 'bhalut'})
+
+    if request.status_code == 200:
+        data = request.json()
+
+        for topic in (data['data']['children']):
+            for word in topic['data']['title'].split():
+                for x in range(len(word_list)):
+                    if word_list[x].lower() == word.lower():
+                        count[x] += 1
+
+        after = data['data']['after']
+        if after is None:
+            save = []
+            for x in range(len(word_list)):
+                for y in range(x + 1, len(word_list)):
+                    if word_list[x].lower() == word_list[y].lower():
+                        save.append(j)
+                        count[x] += count[y]
+
+            for x in range(len(word_list)):
+                for y in range(x, len(word_list)):
+                    if (count[y] > count[x] or
+                            (word_list[x] > word_list[y] and
+                             count[y] == count[x])):
+                        aux = count[x]
+                        count[x] = count[y]
+                        count[y] = aux
+                        aux = word_list[x]
+                        word_list[x] = word_list[y]
+                        word_list[y] = aux
+
+            for x in range(len(word_list)):
+                if (count[x] > 0) and x not in save:
+                    print("{}: {}".format(word_list[x].lower(), count[x]))
         else:
-            for key, value in sorted(found_dict.items(), key=lambda item: (item[1], item[0]), reverse=True):
-                print('{}: {}'.format(key, value))
-    else:
-        return
+            count_words(subreddit, word_list, after, count)
