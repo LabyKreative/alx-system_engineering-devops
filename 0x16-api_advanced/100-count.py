@@ -23,7 +23,7 @@ def count_words(subreddit, word_list, after="", count=[]):
     request = requests.get(url,
                            params={'after': after},
                            allow_redirects=False,
-                           headers={'user-agent': 'bhalut'})
+                           headers={'User-Agent': 'LabyKreative'})
 
     if request.status_code == 200:
         data = request.json()
@@ -40,7 +40,7 @@ def count_words(subreddit, word_list, after="", count=[]):
             for x in range(len(word_list)):
                 for y in range(x + 1, len(word_list)):
                     if word_list[x].lower() == word_list[y].lower():
-                        save.append(j)
+                        save.append(x)
                         count[x] += count[y]
 
             for x in range(len(word_list)):
