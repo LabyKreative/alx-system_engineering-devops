@@ -4,6 +4,7 @@
 subreddit is given, the function should return 0.
 """
 import requests
+from requests import get
 
 
 def number_of_subscribers(subreddit):
@@ -14,7 +15,7 @@ def number_of_subscribers(subreddit):
 
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     user_agent = {"User-Agent": "Google Chrome Version 115.0.5790.171"}
-    response = get(url, headers=user_agent, allow_redirects=false)
+    response = get(url, headers=user_agent)
     results = response.json()
 
     try:
