@@ -3,7 +3,7 @@
 (not active users, total subscribers) for a given subreddit. If an invalid
 subreddit is given, the function should return 0.
 """
-from requests import get
+import requests
 
 
 def number_of_subscribers(subreddit):
@@ -12,9 +12,9 @@ def number_of_subscribers(subreddit):
     if subreddit is None or not isinstance(subreddit, str):
         return 0
 
-    user_agent = {"User-agent": "Google Chrome Version 115.0.5790.171"}
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    response = get(url, headers=user_agent)
+    user_agent = {"User-Agent": "Google Chrome Version 115.0.5790.171"}
+    response = get(url, headers=user_agent, allow_redirects=false)
     results = response.json()
 
     try:
