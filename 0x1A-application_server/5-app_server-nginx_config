@@ -39,9 +39,7 @@
 
         # Nginx serves static content for AirBnB_clone_v4
         location /static {
-            proxy_pass http://127.0.0.1:5003;
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
+            alias /AirBnB_clone_v4/web_dynamic/static/;
         }
 
         # 404 error page
