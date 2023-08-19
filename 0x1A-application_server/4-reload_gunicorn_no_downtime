@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# a script that stops a worker gracefully & Start a new worker process
+# Reload Gunicorn gracefully
+
 ps aux | grep gunicorn | awk '{ print $2 }' | xargs kill -HUP
