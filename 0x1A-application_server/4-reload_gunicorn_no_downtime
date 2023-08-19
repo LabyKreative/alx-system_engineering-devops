@@ -1,0 +1,25 @@
+#!/bin/env bash
+
+# Stops a worker gracefully
+function stop_worker() {
+    echo "Stopping worker $1..."
+    kill -QUIT $1
+}
+
+# Start a new worker
+function start_worker() {
+    echo "Starting a new worker..."
+    gunicorn -w 1 -b 0.0.0.0:5003 web_dynamic.2-hbnb:app &
+}
+
+# Get the list of worker PIDs
+worker_pids=$(pgrep gunicorn)
+
+# Iterate over worker PIDs and stop them gracefully
+for pid in $worker_pids; do
+    stop_worker $pid
+    sleep 5  # Allow some time for worker to finish processing
+done
+
+# Start a new worker
+start_worker
