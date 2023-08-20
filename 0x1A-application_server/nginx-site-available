@@ -1,0 +1,52 @@
+# Configures Nginx to serve the specified routes
+
+server {
+    # Listen on port 80 for all incoming requests
+    listen 80;
+
+    # IP of server to use as DN
+    server_name 35.153.194.206;  # Replace with your server's IP or domain
+
+    # Customize the HTTP response header
+    add_header X-Served-By 213215-web-01;
+
+    # Serve the /airbnb-onepage/ route from AirBnB_clone_v2
+    location /airbnb-onepage/ {
+        proxy_pass http://127.0.0.1:5000/airbnb-onepage/;  # Proxy requests to port 5000
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # Proxy requests to the route /airbnb-dynamic/number_odd_or_even/(any integer) to Gunicorn on port 5001
+    location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
+        proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # Nginx serves this page both locally and on its public IP on port 80
+    location /api {
+        proxy_pass http://127.0.0.1:5002/api;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # Nginx configs /2-hbnb route of AirBnB_clone_v4 as root location
+    location / {
+        proxy_pass http://127.0.0.1:5003/2-hbnb;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # Nginx serves static content for AirBnB_clone_v4
+    location /static {
+        alias /AirBnB_clone_v4/web_dynamic/static/;
+    }
+
+    # 404 error page
+    error_page 404 /404.html;
+    location /404 {
+        root /var/www/html;
+        internal;
+    }
+}
