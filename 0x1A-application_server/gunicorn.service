@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=laby
 Group=www-data
-WorkingDirectory=/AirBnB_clone_v4/web_dynamic
+WorkingDirectory=/home/laby/AirBnB_clone_v4
 Environment="PATH=/home/laby/venv/bin"
 ExecStart=/home/laby/venv/bin/gunicorn -w 3 --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app >> /tmp/airbnb-access.log 2>> /tmp/airbnb-error.log
 Restart=always
